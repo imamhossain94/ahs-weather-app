@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">AHS Weather App</string>
+    <string name="something_went_wrong">Something Went Wrong</string>
+    <string name="ahoteshanul">Ahoteshanul</string>
+    <string name="created_by">Created By</string>
+</resources>
