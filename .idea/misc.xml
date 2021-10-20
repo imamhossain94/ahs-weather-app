@@ -6,6 +6,9 @@
         <entry key="..\:/ahs_weather_app/app/src/main/res/drawable-v24/gradient_bg.xml" value="0.2078125" />
         <entry key="..\:/ahs_weather_app/app/src/main/res/drawable/gradient_back_ground.xml" value="0.2078125" />
         <entry key="..\:/ahs_weather_app/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="app/src/main/res/drawable-v21/app_widget_background.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
+        <entry key="app/src/main/res/layout/app_widget.xml" value="0.2" />
       </map>
     </option>
   </component>
