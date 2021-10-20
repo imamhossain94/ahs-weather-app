@@ -4,6 +4,7 @@ import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
 import android.content.Context
 import android.widget.RemoteViews
+import com.orhanobut.hawk.Hawk
 
 /**
  * Implementation of App Widget functionality.
@@ -29,15 +30,24 @@ class AppWidget : AppWidgetProvider() {
     }
 }
 
+//Widget will update every 30 minutes
+
 internal fun updateAppWidget(
     context: Context,
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
-    val widgetText = "Lal vai"
-    // Construct the RemoteViews object
+
+
+    Hawk.init(context).build()
+    val status: String = Hawk.get("status")
+    val temp: String = Hawk.get("temp")
+    val tempMaxMin: String = Hawk.get("temp_max_min")
+
     val views = RemoteViews(context.packageName, R.layout.app_widget)
-    ///views.setTextViewText(R.id.appwidget_text, widgetText)
+    views.setTextViewText(R.id.status, status)
+    views.setTextViewText(R.id.temp, temp)
+    views.setTextViewText(R.id.temp_min_max, tempMaxMin)
 
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)

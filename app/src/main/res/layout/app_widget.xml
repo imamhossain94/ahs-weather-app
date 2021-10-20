@@ -20,7 +20,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Clear Sky"
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -31,7 +30,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="sans-serif-thin"
-            android:text="29°C"
             android:textColor="@color/white"
             android:textSize="70sp"
             android:textStyle="bold" />
@@ -40,7 +38,6 @@
             android:id="@+id/temp_min_max"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Min Temp: 05:05 AM"
             android:gravity="center"
             android:textColor="@color/white"
             android:textStyle="bold" />

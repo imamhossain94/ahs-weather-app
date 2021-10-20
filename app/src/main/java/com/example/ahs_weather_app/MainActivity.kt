@@ -11,6 +11,11 @@ import org.json.JSONObject
 import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
+import com.orhanobut.hawk.Hawk
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,11 +25,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Hawk.init(this).build()
 
         weatherTask().execute()
 
     }
 
+    // Try to use kotlin co-routine (Message: Md Imam Hossain)
     inner class weatherTask() : AsyncTask<String, Void, String>() {
         override fun onPreExecute() {
             super.onPreExecute()
@@ -80,12 +87,15 @@ class MainActivity : AppCompatActivity() {
 
                 findViewById<TextView>(R.id.address).text = address
                 findViewById<TextView>(R.id.updated_at).text = updatedAtText
-                findViewById<TextView>(R.id.status).text = weatherDescription.capitalize()
+                findViewById<TextView>(R.id.status).text =
+                    weatherDescription.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
                 findViewById<TextView>(R.id.temp).text = temp
                 findViewById<TextView>(R.id.temp_min).text = tempMin
                 findViewById<TextView>(R.id.temp_max).text = tempMax
-                findViewById<TextView>(R.id.sunrise).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise * 1000))
-                findViewById<TextView>(R.id.sunset).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset * 1000))
+                findViewById<TextView>(R.id.sunrise).text =
+                    SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise * 1000))
+                findViewById<TextView>(R.id.sunset).text =
+                    SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset * 1000))
                 findViewById<TextView>(R.id.wind).text = windSpeed
                 findViewById<TextView>(R.id.pressure).text = pressure
                 findViewById<TextView>(R.id.humidity).text = humidity
@@ -93,6 +103,14 @@ class MainActivity : AppCompatActivity() {
 
                 findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
                 findViewById<RelativeLayout>(R.id.mainContainer).visibility = View.VISIBLE
+
+                //Save data in local storage
+                Hawk.put(
+                    "status",
+                    weatherDescription.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() });
+                Hawk.put("temp", temp);
+                Hawk.put("temp_max_min", "$tempMin  $tempMax");
+
 
             } catch (e: Exception) {
                 findViewById<ProgressBar>(R.id.loader).visibility = View.GONE
