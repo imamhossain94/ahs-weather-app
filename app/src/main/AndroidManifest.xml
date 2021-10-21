@@ -3,6 +3,7 @@
     package="com.example.ahs_weather_app">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_baseline_eco_24"
@@ -10,6 +11,18 @@
         android:roundIcon="@drawable/ic_baseline_eco_24"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ahs_weather_app">
+        <receiver
+            android:name=".AppWidget"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/app_widget_info" />
+        </receiver>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
